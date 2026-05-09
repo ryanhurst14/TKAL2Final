@@ -12,10 +12,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="231dd8ad-6d25-499c-a3bd-1f0de594486e" name="Changes" comment="Init Commit. &#10;- Created Character with Movement and Look">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.TKAL2/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.TKAL2/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.TKAL2/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.TKAL2/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TKAL2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TKAL2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TKAL2/Projectiles/TKAL2ProjectileMagic.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TKAL2/Projectiles/TKAL2ProjectileMagic.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TKAL2/Projectiles/TKAL2ProjectileMagic.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TKAL2/Projectiles/TKAL2ProjectileMagic.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TKAL2/TKAL2.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TKAL2/TKAL2.Build.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,12 +30,16 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.7/Engine/Source/Runtime/Engine/Classes/Components/PrimitiveComponent.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/TKAL2/Projectiles/TKAL2ProjectileMagic.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/TKAL2/Projectiles/TKAL2ProjectileMagic.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/TKAL2/TKAL2Character.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/TKAL2/TKAL2Character.h" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -49,9 +54,9 @@
     "C/C++ Project.TKAL2.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -165,6 +170,7 @@
       <updated>1778242367908</updated>
       <workItem from="1778242372062" duration="3294000" />
       <workItem from="1778291224408" duration="1972000" />
+      <workItem from="1778293769617" duration="3010000" />
     </task>
     <servers />
   </component>

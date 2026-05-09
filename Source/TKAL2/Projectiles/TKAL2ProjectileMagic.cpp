@@ -2,25 +2,46 @@
 
 
 #include "TKAL2ProjectileMagic.h"
-
+#include "Components/SphereComponent.h"
+#include "GameFramework/ProjectileMovementComponent.h"
+#include "NiagaraComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "NiagaraFunctionLibrary.h"
 
 // Sets default values
 ATKAL2ProjectileMagic::ATKAL2ProjectileMagic()
 {
-	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
-}
-
-// Called when the game starts or when spawned
-void ATKAL2ProjectileMagic::BeginPlay()
-{
-	Super::BeginPlay();
+	SphereComp = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComp"));
+	RootComponent = SphereComp;
+	SphereComp->SetSphereRadius(16.0f);
+	SphereComp->SetCollisionProfileName("Projectile");
+	
+	LoopedNiagaraComp = CreateDefaultSubobject<UNiagaraComponent>(TEXT("LoopedNiagaraComp"));
+	LoopedNiagaraComp->SetupAttachment(RootComponent);
+	
+	ProjMoveComp = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjMoveComp"));
+	ProjMoveComp->InitialSpeed = 2000.0f;
+	ProjMoveComp->ProjectileGravityScale = 0.0f;
 	
 }
 
-// Called every frame
-void ATKAL2ProjectileMagic::Tick(float DeltaTime)
+void ATKAL2ProjectileMagic::PostInitializeComponents()
 {
-	Super::Tick(DeltaTime);
+	Super::PostInitializeComponents();
+
+	SphereComp->OnComponentHit.AddDynamic(this, &ATKAL2ProjectileMagic::OnActorHit);
+	SphereComp->IgnoreActorWhenMoving(GetInstigator(), true);
 }
 
+void ATKAL2ProjectileMagic::OnActorHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+	FVector NormalImpulse, const FHitResult& Hit)
+{
+	// @todo: create our own damage type
+	TSubclassOf<UDamageType> DmgTypeClass = UDamageType::StaticClass();
+	
+	UGameplayStatics::ApplyDamage(OtherActor, 10.f, GetInstigatorController(), this, DmgTypeClass);
+
+	UNiagaraFunctionLibrary::SpawnSystemAtLocation(this, ExplosionEffect, GetActorLocation());
+
+	Destroy();
+}

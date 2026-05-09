@@ -2,7 +2,7 @@
 
 
 #include "TKAL2Character.h"
-
+#include "Projectiles/TKAL2ProjectileMagic.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "EnhancedInputComponent.h"
@@ -20,8 +20,7 @@ ATKAL2Character::ATKAL2Character()
 	CameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComp"));
 	CameraComp->SetupAttachment(SpringArmComp);
 	
-	
-	
+	MuzzleSocketName = "Muzzle_01";
 }
 
 // Called when the game starts or when spawned
@@ -38,7 +37,6 @@ void ATKAL2Character::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-
 // Called to bind functionality to input
 void ATKAL2Character::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
@@ -48,8 +46,9 @@ void ATKAL2Character::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 	
 	EnhancedInput->BindAction(Input_Move, ETriggerEvent::Triggered, this, &ATKAL2Character::Move);
 	EnhancedInput->BindAction(Input_Look, ETriggerEvent::Triggered, this, &ATKAL2Character::Look);
-	
+	EnhancedInput->BindAction(Input_PrimaryAttack, ETriggerEvent::Triggered, this, &ATKAL2Character::PrimaryAttack);
 }
+
 
 void ATKAL2Character::Move(const FInputActionValue& InValue)
 {
@@ -72,5 +71,17 @@ void ATKAL2Character::Look(const FInputActionInstance& InValue)
 	AddControllerPitchInput(InputValue.Y);
 	AddControllerYawInput(InputValue.X);
 }
+
+void ATKAL2Character::PrimaryAttack()
+{
+	FVector SpawnLocation = GetMesh()->GetSocketLocation(MuzzleSocketName);;
+	FRotator SpawnRotation = GetControlRotation();
+	FActorSpawnParameters SpawnInfo;
+	SpawnInfo.Instigator = this;
+	SpawnInfo.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+	
+	AActor* NewActor = GetWorld()->SpawnActor<AActor>(ProjectileClass, SpawnLocation, SpawnRotation, SpawnInfo);
+}
+
 
 
