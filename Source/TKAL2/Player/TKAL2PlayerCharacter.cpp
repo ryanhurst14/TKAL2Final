@@ -9,7 +9,14 @@
 #include "Projectiles/TKAL2ProjectileMagic.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
-#include "EnhancedInputComponent.h"
+#include "EnhancedInputComponent.h"   
+#include "../../../Intermediate/ProjectFiles/TKAL2GameTypes.h"
+#include "GameFramework/PawnMovementComponent.h"
+#include "ActionSystem/TKAL2ActionSystemComponent.h"
+
+TAutoConsoleVariable<float> CVarProjectileAdjustmentDebugDrawing(TEXT("game.projectile.DebugDraw"), 0.0f,
+	TEXT("Enable projectile aim adjustment debug rendering (0 = off, < 0 is duration"), ECVF_Cheat);
+
 
 // Sets default values
 ATKAL2PlayerCharacter::ATKAL2PlayerCharacter()
@@ -23,17 +30,16 @@ ATKAL2PlayerCharacter::ATKAL2PlayerCharacter()
 	CameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComp"));
 	CameraComp->SetupAttachment(SpringArmComp);
 	
+	ActionSystemComp = CreateDefaultSubobject<UTKAL2ActionSystemComponent>(TEXT("ActionSystemComp"));
+	
 	MuzzleSocketName = "Muzzle_01";
 }
 
-void ATKAL2PlayerCharacter::BeginPlay()
+void ATKAL2PlayerCharacter::PostInitializeComponents()
 {
-	Super::BeginPlay();
-}
-
-void ATKAL2PlayerCharacter::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
+	Super::PostInitializeComponents();
+	
+	ActionSystemComp->OnHealthChanged.AddDynamic(this, &ATKAL2PlayerCharacter::OnHealthChanged);
 }
 
 // Called to bind functionality to input
@@ -45,10 +51,29 @@ void ATKAL2PlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 	
 	EnhancedInput->BindAction(Input_Move, ETriggerEvent::Triggered, this, &ATKAL2PlayerCharacter::Move);
 	EnhancedInput->BindAction(Input_Look, ETriggerEvent::Triggered, this, &ATKAL2PlayerCharacter::Look);
-	EnhancedInput->BindAction(Input_PrimaryAttack, ETriggerEvent::Triggered, this,
-		&ATKAL2PlayerCharacter::PrimaryAttack);
 	EnhancedInput->BindAction(Input_Jump, ETriggerEvent::Triggered, this, &ATKAL2PlayerCharacter::Jump);
+		
+	EnhancedInput->BindAction(Input_PrimaryAttack, ETriggerEvent::Triggered, this,
+		&ATKAL2PlayerCharacter::StartProjectileAttack, PrimaryAttackProjectileClass);
+	EnhancedInput->BindAction(Input_SecondaryAttack, ETriggerEvent::Triggered, this, 
+		&ATKAL2PlayerCharacter::StartProjectileAttack, SecondaryAttackProjectileClass);
+	EnhancedInput->BindAction(Input_SpecialAttack, ETriggerEvent::Triggered, this, 
+		&ATKAL2PlayerCharacter::StartProjectileAttack, SpecialAttackProjectileClass);
+
+	                                                                                                                                                                                                                                                                                                                                               
 }
+
+float ATKAL2PlayerCharacter::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent,
+	class AController* EventInstigator, AActor* DamageCauser)
+{
+	float ActualDamage = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+	
+	ActionSystemComp->ApplyHealthChange(-DamageAmount);
+	
+	return ActualDamage;
+}
+
+
 
 void ATKAL2PlayerCharacter::Move(const FInputActionValue& InValue)
 {
@@ -73,7 +98,7 @@ void ATKAL2PlayerCharacter::Look(const FInputActionInstance& InValue)
 	AddControllerYawInput(InputValue.X);
 }
 
-void ATKAL2PlayerCharacter::PrimaryAttack()
+void ATKAL2PlayerCharacter::StartProjectileAttack(TSubclassOf<ATKAL2Projectile> ProjClass)
 {
 	PlayAnimMontage(AttackMontage);
 	
@@ -87,22 +112,76 @@ void ATKAL2PlayerCharacter::PrimaryAttack()
 	UGameplayStatics::PlaySound2D(this, CastingSound); //2D cause its on the player
 	
 	//Set 0.2s timer to shoot when hand is in correct position
-	GetWorldTimerManager().SetTimer(AttackTimerHandle, this, &ATKAL2PlayerCharacter::AttackTimerElapsed, 
-		AttackDelayTime);
+	FTimerDelegate Delegate;
+	Delegate.BindUObject(this, &ATKAL2PlayerCharacter::AttackTimerElapsed, ProjClass);
+	GetWorldTimerManager().SetTimer(AttackTimerHandle, Delegate, AttackDelayTime, 
+		false);
 	
 }
 
-void ATKAL2PlayerCharacter::AttackTimerElapsed()
+void ATKAL2PlayerCharacter::AttackTimerElapsed(TSubclassOf<ATKAL2Projectile> ProjClass)
 {
 	//Get spawn info for the projectile
-	FVector SpawnLocation = GetMesh()->GetSocketLocation(MuzzleSocketName);;
-	FRotator SpawnRotation = GetControlRotation();
+	FVector SpawnLocation = GetMesh()->GetSocketLocation(MuzzleSocketName);
 	FActorSpawnParameters SpawnInfo;
 	SpawnInfo.Instigator = this;
 	SpawnInfo.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+	
+	FVector EyeLocation = CameraComp->GetComponentLocation();
+	FRotator EyeRotation = GetControlRotation();
+	FVector TraceEnd = EyeLocation + (EyeRotation.Vector() * 5000);
+	FCollisionQueryParams QueryParams;
+	QueryParams.AddIgnoredActor(this);
+	UWorld* World = GetWorld();
+	FHitResult Hit;
+	FVector AdjustedTargetLocation;
+	if (World->LineTraceSingleByChannel(Hit, EyeLocation, TraceEnd, COLLISION_PROJECTILE, QueryParams))
+	{
+		AdjustedTargetLocation = Hit.Location;
+	} else
+	{
+		AdjustedTargetLocation = TraceEnd;
+	}
+	
+	FRotator SpawnRotation = (AdjustedTargetLocation - SpawnLocation).Rotation();
+	
 	//Spawn Projectile
-	AActor* NewProj = GetWorld()->SpawnActor<AActor>(ProjectileClass, SpawnLocation, SpawnRotation, SpawnInfo);
+	AActor* NewProj = World->SpawnActor<AActor>(ProjClass, SpawnLocation, SpawnRotation, SpawnInfo);
 	MoveIgnoreActorAdd(NewProj); //Ignore character
+	
+	float DebugDrawDuration = CVarProjectileAdjustmentDebugDrawing.GetValueOnGameThread();
+	
+#if !UE_BUILD_SHIPPING
+	if (DebugDrawDuration > 0.0f)
+	{
+		// hit location or trace end
+		DrawDebugBox(World, AdjustedTargetLocation, FVector(20.0f), FColor::Green,false, 
+			DebugDrawDuration);
+	
+		//adjusted line trace
+		DrawDebugLine(World, EyeLocation, TraceEnd, FColor::Green, false, DebugDrawDuration);
+	
+		//new proj path
+		DrawDebugLine(World, SpawnLocation, AdjustedTargetLocation, FColor::Yellow, false,
+			DebugDrawDuration);
+		//orig path
+		DrawDebugLine(World, SpawnLocation, SpawnLocation + (GetControlRotation().Vector() * 5000.0f), 
+			FColor::Purple, false, DebugDrawDuration);
+	}
+#endif
+	
+}
+
+void ATKAL2PlayerCharacter::OnHealthChanged(float NewHealth, float OldHealth)
+{
+	if (FMath::IsNearlyZero(NewHealth))
+	{
+		DisableInput(nullptr);
+		
+		GetMovementComponent()->StopMovementImmediately();
+		
+		PlayAnimMontage(DeathMontage);
+	}
 }
 
 

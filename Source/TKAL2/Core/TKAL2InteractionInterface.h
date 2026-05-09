@@ -19,5 +19,7 @@ class TKAL2_API ITKAL2InteractionInterface
 	GENERATED_BODY()
 
 public:
-	virtual void Interact() = 0;
+	
+	UFUNCTION(BlueprintNativeEvent)
+	void Interact();
 };

@@ -29,12 +29,15 @@ void ATKAL2ItemChest::Tick(float DeltaTime)
 	
 	if (FMath::IsNearlyEqual(CurrentAnimationPitch,AnimationTargetPitch))
 	{
+		//Anim Complete
 		SetActorTickEnabled(false);
+		
+		ChestAnimationComplete();
 	}
 }
 
 
-void ATKAL2ItemChest::Interact()
+void ATKAL2ItemChest::Interact_Implementation()
 {
 	//Play Anim
 	SetActorTickEnabled(true);

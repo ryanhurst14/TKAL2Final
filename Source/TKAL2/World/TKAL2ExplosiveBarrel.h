@@ -51,6 +51,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category="Effects")
 	TObjectPtr<UNiagaraSystem> ExplosionEffect;
 	
+	UFUNCTION(BlueprintCallable)
 	void ExplodeTimerElapsed();
 	
 	

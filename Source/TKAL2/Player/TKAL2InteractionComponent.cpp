@@ -5,7 +5,8 @@
 #include "Engine/OverlapResult.h"
 #include "Core/TKAL2InteractionInterface.h"
 
-
+TAutoConsoleVariable<bool> CVarInteractionDebugDrawing(TEXT("game.interaction.DebugDraw"), false,
+	TEXT("Enable interacation component debug rendering (0 = off, 1 = on"), ECVF_Cheat);
 
 UTKAL2InteractionComponent::UTKAL2InteractionComponent()
 {
@@ -15,11 +16,13 @@ UTKAL2InteractionComponent::UTKAL2InteractionComponent()
 void UTKAL2InteractionComponent::Interact()
 {
 	//Get the interaction interface of the best item and call interact()
-	ITKAL2InteractionInterface* InteractionInterface = Cast<ITKAL2InteractionInterface>(SelectedActor);
+	/*ITKAL2InteractionInterface* InteractionInterface = Cast<ITKAL2InteractionInterface>(SelectedActor);
 	if (InteractionInterface)
-	{
+	{a
 		InteractionInterface->Interact();
-	}
+	}*/
+	
+	ITKAL2InteractionInterface::Execute_Interact(SelectedActor);
 }
 
 void UTKAL2InteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType,
@@ -30,7 +33,7 @@ void UTKAL2InteractionComponent::TickComponent(float DeltaTime, ELevelTick TickT
 	//Get player controller and access to player
 	APlayerController* PC = CastChecked<APlayerController>(GetOwner());
 	FVector Center = PC->GetPawn()->GetActorLocation();
-	
+	FVector CameraLocation = PC->PlayerCameraManager->GetCameraLocation();
 	ECollisionChannel CollisionChannel = COLLISION_INTERACTION;
 	FCollisionShape Shape;
 	Shape.SetSphere(InteractionRadius);
@@ -39,38 +42,60 @@ void UTKAL2InteractionComponent::TickComponent(float DeltaTime, ELevelTick TickT
 	TArray<FOverlapResult> Overlaps;
 	GetWorld()->OverlapMultiByChannel(Overlaps, Center, FQuat::Identity, CollisionChannel, Shape);
 	
-	float HighestDot = -1.0;
+	float HighestWeight = 0;
+	float InteractionRadiusSqrd = InteractionRadius * InteractionRadius;
+	
 	AActor* BestActor = nullptr;
+	
+	bool bEnabledDebugDraw = CVarInteractionDebugDrawing.GetValueOnGameThread();
 	
 	for (FOverlapResult& Overlap : Overlaps)
 	{
+		
+		FVector Origin;
+		FVector BoxExtends;
+		Overlap.GetActor()->GetActorBounds(true, Origin, BoxExtends);
+		
 		//Show overlap with interaction radius
-		FVector OverlapLocation = Overlap.GetActor()->GetActorLocation();
+		//FVector OverlapLocation = Overlap.GetActor()->GetActorLocation();
 		//Get dot product 
+		FVector OverlapDirection = (Origin - CameraLocation).GetSafeNormal();
 		
+		float DistanceTo = (Origin - Center).SizeSquared();
+		float NormDistanceTo = 1.0f - (DistanceTo / InteractionRadiusSqrd);
 		
-		FVector OverlapDirection = (OverlapLocation - Center).GetSafeNormal();
 		float DotResult = FVector::DotProduct(OverlapDirection, PC->GetControlRotation().Vector());
+		float NormDotResult = DotResult * 0.5 + 0.5f; //Norm to 0.0f to 1.0f
 		
 		//Get the best dot so far 
-		if (DotResult > HighestDot)
+		float Weight = (NormDotResult * DirectionWeightScale) + (NormDistanceTo * DistToWeightScale);
+		if (Weight > HighestWeight)
 		{
 			BestActor = Overlap.GetActor();
-			HighestDot = DotResult;
+			HighestWeight = Weight;
 		}
 		
-		DrawDebugBox(GetWorld(), OverlapLocation, FVector(50.0f), FColor::Red);
-		FString DebugString = FString::Printf(TEXT("Dot: %f"), DotResult);
-		DrawDebugString(GetWorld(), OverlapLocation, DebugString, nullptr, FColor::White, 0.0f, true);
+		if (bEnabledDebugDraw)
+		{
+			DrawDebugBox(GetWorld(), Origin, FVector(50.0f), FColor::Red);
+			FString DebugString = FString::Printf(TEXT("Weight: %f, Dot: %f, Dist: %f"), Weight, NormDotResult, NormDistanceTo);
+			DrawDebugString(GetWorld(), Origin, DebugString, nullptr, FColor::White, 0.0f, true);
+		}
 	}
 	
-	if (BestActor != nullptr)
+	SelectedActor = BestActor;
+	
+	if (bEnabledDebugDraw)
 	{
-		SelectedActor = BestActor;
-		DrawDebugBox(GetWorld(), BestActor->GetActorLocation(), FVector(50.0f), FColor::Green);
+		if (BestActor != nullptr)
+		{
+			DrawDebugBox(GetWorld(), BestActor->GetActorLocation(), FVector(50.0f), FColor::Green);
+		}
+		
+		DrawDebugSphere(GetWorld(), Center, InteractionRadius, 32, FColor::White);
 	}
 	
-	DrawDebugSphere(GetWorld(), Center, InteractionRadius, 32, FColor::White);
+	
 
 }
 

@@ -6,6 +6,9 @@
 #include "GameFramework/Character.h"
 #include "TKAL2PlayerCharacter.generated.h"
 
+class UTKAL2ActionSystemComponent;
+class UTKAL2InteractionComponent;
+class ATKAL2Projectile;
 class UNiagaraSystem;
 class ATKAL2ProjectileMagic;
 struct FInputActionInstance;
@@ -35,10 +38,19 @@ protected:
 	FName MuzzleSocketName;
 	
 	UPROPERTY(EditDefaultsOnly, Category="PrimaryAttack")
-	TSubclassOf<ATKAL2ProjectileMagic> ProjectileClass;
+	TSubclassOf<ATKAL2Projectile> PrimaryAttackProjectileClass;
+	
+	UPROPERTY(EditDefaultsOnly, Category="PrimaryAttack")
+	TSubclassOf<ATKAL2Projectile> SecondaryAttackProjectileClass;
+	
+	UPROPERTY(EditDefaultsOnly, Category="PrimaryAttack")
+	TSubclassOf<ATKAL2Projectile> SpecialAttackProjectileClass;
 	
 	UPROPERTY(EditDefaultsOnly, Category="PrimaryAttack")
 	TObjectPtr<UAnimMontage> AttackMontage;
+	
+	UPROPERTY(EditDefaultsOnly, Category="Death")
+	TObjectPtr<UAnimMontage> DeathMontage;
 	
 	UPROPERTY(EditDefaultsOnly, Category="Input")
 	TObjectPtr<UInputAction> Input_Move;
@@ -52,25 +64,39 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category="Input")
 	TObjectPtr<UInputAction> Input_Jump;
 	
+	UPROPERTY(EditDefaultsOnly, Category="Input")
+	TObjectPtr<UInputAction> Input_SecondaryAttack;
+	
+	UPROPERTY(EditDefaultsOnly, Category="Input")
+	TObjectPtr<UInputAction> Input_SpecialAttack;
+	
 	UPROPERTY(VisibleAnywhere, Category="Components")
 	TObjectPtr<UCameraComponent> CameraComp;
 	
 	UPROPERTY(VisibleAnywhere, Category="Components")
 	TObjectPtr<USpringArmComponent> SpringArmComp;
 	
-	virtual void BeginPlay() override;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Components")
+	TObjectPtr<UTKAL2ActionSystemComponent> ActionSystemComp;
+	
 	
 	void Move(const FInputActionValue& InValue);
 	void Look(const FInputActionInstance& InValue);
-	void PrimaryAttack();
+	void StartProjectileAttack(TSubclassOf<ATKAL2Projectile> ProjClass);
 	
-	void AttackTimerElapsed();
+	void AttackTimerElapsed(TSubclassOf<ATKAL2Projectile> ProjClass);
+	
+	UFUNCTION()
+	void OnHealthChanged(float NewHealth, float OldHealth);
 	
 public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, 
+		class AController* EventInstigator, AActor* DamageCauser) override;
+	
+	virtual void PostInitializeComponents() override;
 };

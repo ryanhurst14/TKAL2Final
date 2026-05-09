@@ -52,8 +52,19 @@ void ATKAL2ExplosiveBarrel::ExplodeTimerElapsed()
 	bHasExploded = true;
 	
 	ImpulseComp->FireImpulse();
-	ActiveBurningEffectComp->Deactivate();
-	ActiveBurningSoundComp->Stop();
+	if (ActiveBurningEffectComp)
+	{
+		ActiveBurningEffectComp->Deactivate();
+	}
+	
+	if (ActiveBurningSoundComp)
+	{
+		ActiveBurningSoundComp->Stop();
+	}
+	
+	StaticMeshComp->AddImpulse(FVector::UpVector * 1000, NAME_None, true);
+	StaticMeshComp->AddAngularImpulseInDegrees(FVector::RightVector * 1000, NAME_None, true);
+	
 	//Play final explosion effects and sounds	
 	UNiagaraFunctionLibrary::SpawnSystemAtLocation(this, ExplosionEffect, GetActorLocation());
 	UGameplayStatics::PlaySoundAtLocation(this, ExplosionSound, GetActorLocation(), FRotator::ZeroRotator);
