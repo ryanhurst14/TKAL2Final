@@ -13,49 +13,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="231dd8ad-6d25-499c-a3bd-1f0de594486e" name="Changes" comment="Init Commit. &#10;- Created Character with Movement and Look">
-      <change afterPath="$PROJECT_DIR$/Source/TKAL2/AI/TKAL2AICharacter.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/TKAL2/AI/TKAL2AICharacter.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/TKAL2/ActionSystem/TKAL2ActionSystemComponent.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/TKAL2/ActionSystem/TKAL2ActionSystemComponent.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/TKAL2/Projectiles/TKAL2BlackHoleProjectile.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/TKAL2/Projectiles/TKAL2BlackHoleProjectile.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/TKAL2/Projectiles/TKAL2Projectile.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/TKAL2/Projectiles/TKAL2Projectile.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/TKAL2/Projectiles/TKAL2TeleportProjectile.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/TKAL2/Projectiles/TKAL2TeleportProjectile.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/TKAL2/World/TKAL2HealthPickupActor.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/TKAL2/World/TKAL2HealthPickupActor.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/TKAL2/World/TKAL2PickupActor.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/TKAL2/World/TKAL2PickupActor.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TKAL2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TKAL2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/TKAL2/BP_GameMode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/TKAL2/BP_GameMode.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/TKAL2/BP_PlayerCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/TKAL2/BP_PlayerCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/TKAL2/Input/IMC_DefaultPlayer.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/TKAL2/Input/IMC_DefaultPlayer.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/TKAL2/Maps/P_OpenWorldTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/TKAL2/Maps/P_OpenWorldTestMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/TKAL2/World/BP_ExplosiveBarrel.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/TKAL2/World/BP_ExplosiveBarrel.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/TKAL2/World/BP_ItemChest.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/TKAL2/World/BP_ItemChest.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultEditor.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEditor.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/ParagonMinions/Characters/Minions/Down_Minions/Meshes/MinionRanged_AnimBP.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ParagonMinions/Characters/Minions/Down_Minions/Meshes/MinionRanged_AnimBP.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/ParagonMinions/Characters/Minions/Down_Minions/Meshes/Minion_Lane_Core_Skeleton.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ParagonMinions/Characters/Minions/Down_Minions/Meshes/Minion_Lane_Core_Skeleton.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/ParagonMinions/Characters/Minions/Down_Minions/Meshes/Minion_Lane_Ranged_Dawn.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ParagonMinions/Characters/Minions/Down_Minions/Meshes/Minion_Lane_Ranged_Dawn.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/TKAL2/Maps/P_OpenWorldTestMap/0/VK/SNQCOHYK6JGVJF98XOJHBT.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/TKAL2/Maps/P_OpenWorldTestMap/0/VK/SNQCOHYK6JGVJF98XOJHBT.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/TKAL2/Maps/P_OpenWorldTestMap/1/Q7/ONADBXUE32V64JX4ZLNBKD.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/TKAL2/Maps/P_OpenWorldTestMap/1/Q7/ONADBXUE32V64JX4ZLNBKD.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/TKAL2/Maps/P_OpenWorldTestMap/2/5S/13ZACA2UGSNEV0I55KAVYM.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/TKAL2/Maps/P_OpenWorldTestMap/2/XT/YON9BYWCT9IH8ECCRJURXQ.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/TKAL2/Maps/P_OpenWorldTestMap/8/M5/DRS92K1KMZLEJUD2KZB38R.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/TKAL2/Maps/P_OpenWorldTestMap/8/M5/DRS92K1KMZLEJUD2KZB38R.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/TKAL2/Maps/P_OpenWorldTestMap/9/48/V896B3S9LHFKOS999MV1XH.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/TKAL2/Maps/P_OpenWorldTestMap/9/48/V896B3S9LHFKOS999MV1XH.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/TKAL2/Maps/P_OpenWorldTestMap/E/6S/SXH673O7O58VHILSBFDS6U.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/TKAL2/Maps/P_OpenWorldTestMap/E/6S/SXH673O7O58VHILSBFDS6U.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TKAL2/Core/TKAL2InteractionInterface.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TKAL2/Core/TKAL2InteractionInterface.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TKAL2/Player/TKAL2InteractionComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TKAL2/Player/TKAL2InteractionComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TKAL2/Player/TKAL2InteractionComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TKAL2/Player/TKAL2InteractionComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TKAL2/Player/TKAL2PlayerCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TKAL2/Player/TKAL2PlayerCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TKAL2/Player/TKAL2PlayerCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TKAL2/Player/TKAL2PlayerCharacter.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TKAL2/Projectiles/TKAL2ProjectileMagic.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TKAL2/Projectiles/TKAL2ProjectileMagic.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TKAL2/Projectiles/TKAL2ProjectileMagic.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TKAL2/Projectiles/TKAL2ProjectileMagic.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TKAL2/TKAL2.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TKAL2/TKAL2.Build.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/TKAL2/Maps/P_OpenWorldTestMap/4/EV/9MXZQ3ZNE8OTO7XBH01WXI.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/TKAL2/Maps/P_OpenWorldTestMap/4/EV/9MXZQ3ZNE8OTO7XBH01WXI.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/TKAL2/Maps/P_OpenWorldTestMap/7/VK/3WF4VMY0C2K2VKPEE1LSCU.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/TKAL2/Maps/P_OpenWorldTestMap/7/VK/3WF4VMY0C2K2VKPEE1LSCU.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TKAL2/AI/TKAL2AIController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TKAL2/AI/TKAL2AIController.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TKAL2/AI/TKAL2AIController.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TKAL2/AI/TKAL2AIController.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/TKAL2/World/TKAL2ExplosiveBarrel.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TKAL2/World/TKAL2ExplosiveBarrel.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TKAL2/World/TKAL2ExplosiveBarrel.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TKAL2/World/TKAL2ExplosiveBarrel.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TKAL2/World/TKAL2ItemChest.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TKAL2/World/TKAL2ItemChest.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TKAL2/World/TKAL2ItemChest.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TKAL2/World/TKAL2ItemChest.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TKAL2.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/TKAL2.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TKAL2.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/TKAL2.uproject" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,14 +37,24 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.7/Engine/Plugins/AI/HTNPlanner/Source/HTNPlanner/Private/Debug/GameplayDebuggerCategory_HTN.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.7/Engine/Source/Programs/AutomationTool/AutomationUtils/Utils.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.7/Engine/Source/Programs/AutomationTool/Gauntlet/SelfTest/TestData/LogParser/Win64NormalExit.txt" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.7/Engine/Source/Programs/AutomationTool/Scripts/CheckBalancedMacros.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.7/Engine/Source/Programs/Shared/EpicGames.Redis/EpicGames.Redis.csproj" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.7/Engine/Source/Runtime/AIModule/Classes/EnvironmentQuery/Tests/EnvQueryTest_Pathfinding.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.7/Engine/Source/Runtime/Engine/Classes/Components/PrimitiveComponent.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.7/Engine/Source/Runtime/Engine/Classes/GameFramework/Actor.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.7/Engine/Source/Runtime/Engine/Classes/Kismet/GameplayStatics.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Intermediate/ProjectFiles/TKAL2GameTypes.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Intermediate/ProjectFiles/TKAL2GameTypes.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/TKAL2/AI/TKAL2AICharacter.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/TKAL2/AI/TKAL2AICharacter.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/TKAL2/AI/TKAL2AIController.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/TKAL2/AI/TKAL2AIController.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/TKAL2/AI/TKAL2BTService_CheckRangeTo.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/TKAL2/AI/TKAL2BTService_CheckRangeTo.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/TKAL2/AI/TKAL2EnvQueryContext_TargetActor.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/TKAL2/AI/TKAL2EnvQueryContext_TargetActor.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/TKAL2/ActionSystem/TKAL2ActionSystemComponent.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/TKAL2/ActionSystem/TKAL2ActionSystemComponent.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/TKAL2/Core/TKAL2GameMode.cpp" root0="FORCE_HIGHLIGHTING" />
@@ -252,7 +230,7 @@
       <workItem from="1778242372062" duration="3294000" />
       <workItem from="1778291224408" duration="1972000" />
       <workItem from="1778293769617" duration="39902000" />
-      <workItem from="1778345065443" duration="1548000" />
+      <workItem from="1778345065443" duration="9379000" />
     </task>
     <servers />
   </component>
@@ -282,6 +260,10 @@
           <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
           <option name="timeStamp" value="3" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Source/TKAL2/World/TKAL2ExplosiveBarrel.cpp</url>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

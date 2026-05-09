@@ -9,6 +9,8 @@
 /**
  * 
  */
+
+class UBehaviorTree;
 UCLASS()
 class TKAL2_API ATKAL2AIController : public AAIController
 {
@@ -16,5 +18,11 @@ class TKAL2_API ATKAL2AIController : public AAIController
 	
 public:
 	ATKAL2AIController();
+	
+protected:
+	UPROPERTY(EditDefaultsOnly, Category="AI")
+	TObjectPtr<UBehaviorTree> BehaviourTree;
+	
 	virtual void BeginPlay() override;
+
 };

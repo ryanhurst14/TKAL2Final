@@ -4,6 +4,8 @@
 #include <NiagaraFunctionLibrary.h>
 #include <Components/AudioComponent.h>
 #include <Kismet/GameplayStatics.h>
+#include "TimerManager.h"
+#include "Components/StaticMeshComponent.h"
 #include "PhysicsEngine/RadialForceComponent.h"
 
 
@@ -14,6 +16,7 @@ ATKAL2ExplosiveBarrel::ATKAL2ExplosiveBarrel()
 	RootComponent = StaticMeshComp;
 	StaticMeshComp->SetStaticMesh(StaticMesh);
 	StaticMeshComp->SetSimulatePhysics(true);
+	StaticMeshComp->SetCanEverAffectNavigation(false);
 	
 	//Impulse Component Settings
 	ImpulseComp = CreateDefaultSubobject<URadialForceComponent>(TEXT("ImpulseComp"));
