@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "TKAL2Character.generated.h"
+#include "TKAL2PlayerCharacter.generated.h"
 
 class UNiagaraSystem;
 class ATKAL2ProjectileMagic;
@@ -16,13 +16,13 @@ class UCameraComponent;
 class UAnimMontage;
 
 UCLASS()
-class TKAL2_API ATKAL2Character : public ACharacter
+class TKAL2_API ATKAL2PlayerCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this character's properties
-	ATKAL2Character();
+	ATKAL2PlayerCharacter();
 
 protected:
 	UPROPERTY(EditDefaultsOnly, Category="PrimaryAttack")

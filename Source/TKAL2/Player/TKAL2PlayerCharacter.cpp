@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "TKAL2Character.h"
+#include "TKAL2PlayerCharacter.h"
 
 #include <NiagaraFunctionLibrary.h>
 #include <Kismet/GameplayStatics.h>
@@ -12,7 +12,7 @@
 #include "EnhancedInputComponent.h"
 
 // Sets default values
-ATKAL2Character::ATKAL2Character()
+ATKAL2PlayerCharacter::ATKAL2PlayerCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
 	
@@ -26,31 +26,31 @@ ATKAL2Character::ATKAL2Character()
 	MuzzleSocketName = "Muzzle_01";
 }
 
-void ATKAL2Character::BeginPlay()
+void ATKAL2PlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 }
 
-void ATKAL2Character::Tick(float DeltaTime)
+void ATKAL2PlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
 
 // Called to bind functionality to input
-void ATKAL2Character::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void ATKAL2PlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 	
 	UEnhancedInputComponent* EnhancedInput = Cast<UEnhancedInputComponent>(PlayerInputComponent);
 	
-	EnhancedInput->BindAction(Input_Move, ETriggerEvent::Triggered, this, &ATKAL2Character::Move);
-	EnhancedInput->BindAction(Input_Look, ETriggerEvent::Triggered, this, &ATKAL2Character::Look);
+	EnhancedInput->BindAction(Input_Move, ETriggerEvent::Triggered, this, &ATKAL2PlayerCharacter::Move);
+	EnhancedInput->BindAction(Input_Look, ETriggerEvent::Triggered, this, &ATKAL2PlayerCharacter::Look);
 	EnhancedInput->BindAction(Input_PrimaryAttack, ETriggerEvent::Triggered, this,
-		&ATKAL2Character::PrimaryAttack);
-	EnhancedInput->BindAction(Input_Jump, ETriggerEvent::Triggered, this, &ATKAL2Character::Jump);
+		&ATKAL2PlayerCharacter::PrimaryAttack);
+	EnhancedInput->BindAction(Input_Jump, ETriggerEvent::Triggered, this, &ATKAL2PlayerCharacter::Jump);
 }
 
-void ATKAL2Character::Move(const FInputActionValue& InValue)
+void ATKAL2PlayerCharacter::Move(const FInputActionValue& InValue)
 {
 	FVector2D InputValue = InValue.Get<FVector2D>();
 	
@@ -66,14 +66,14 @@ void ATKAL2Character::Move(const FInputActionValue& InValue)
 	
 }
 
-void ATKAL2Character::Look(const FInputActionInstance& InValue)
+void ATKAL2PlayerCharacter::Look(const FInputActionInstance& InValue)
 {
 	FVector2D InputValue = InValue.GetValue().Get<FVector2D>();
 	AddControllerPitchInput(InputValue.Y);
 	AddControllerYawInput(InputValue.X);
 }
 
-void ATKAL2Character::PrimaryAttack()
+void ATKAL2PlayerCharacter::PrimaryAttack()
 {
 	PlayAnimMontage(AttackMontage);
 	
@@ -87,12 +87,12 @@ void ATKAL2Character::PrimaryAttack()
 	UGameplayStatics::PlaySound2D(this, CastingSound); //2D cause its on the player
 	
 	//Set 0.2s timer to shoot when hand is in correct position
-	GetWorldTimerManager().SetTimer(AttackTimerHandle, this, &ATKAL2Character::AttackTimerElapsed, 
+	GetWorldTimerManager().SetTimer(AttackTimerHandle, this, &ATKAL2PlayerCharacter::AttackTimerElapsed, 
 		AttackDelayTime);
 	
 }
 
-void ATKAL2Character::AttackTimerElapsed()
+void ATKAL2PlayerCharacter::AttackTimerElapsed()
 {
 	//Get spawn info for the projectile
 	FVector SpawnLocation = GetMesh()->GetSocketLocation(MuzzleSocketName);;

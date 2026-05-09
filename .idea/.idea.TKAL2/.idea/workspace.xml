@@ -12,11 +12,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="231dd8ad-6d25-499c-a3bd-1f0de594486e" name="Changes" comment="Init Commit. &#10;- Created Character with Movement and Look">
+      <change afterPath="$PROJECT_DIR$/Source/TKAL2/Core/TKAL2GameMode.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/TKAL2/Core/TKAL2GameMode.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/TKAL2/Core/TKAL2InteractionInterface.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/TKAL2/Core/TKAL2InteractionInterface.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/TKAL2/Player/TKAL2InteractionComponent.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/TKAL2/Player/TKAL2InteractionComponent.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/TKAL2/Player/TKAL2PlayerController.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/TKAL2/Player/TKAL2PlayerController.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/TKAL2/World/TKAL2ItemChest.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/TKAL2/World/TKAL2ItemChest.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TKAL2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TKAL2/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TKAL2/Projectiles/TKAL2ProjectileMagic.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TKAL2/Projectiles/TKAL2ProjectileMagic.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TKAL2/Projectiles/TKAL2ProjectileMagic.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TKAL2/Projectiles/TKAL2ProjectileMagic.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/TKAL2/BP_ExplosiveBarrel.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/TKAL2/BP_ExplosiveBarrel.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/TKAL2/Input/IMC_DefaultPlayer.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/TKAL2/Input/IMC_DefaultPlayer.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/TKAL2/TKAL2.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TKAL2/TKAL2.Build.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TKAL2/TKAL2Character.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TKAL2/Player/TKAL2PlayerCharacter.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TKAL2/TKAL2Character.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TKAL2/Player/TKAL2PlayerCharacter.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,10 +43,23 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.7/Engine/Source/Runtime/Engine/Classes/Components/PrimitiveComponent.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Intermediate/ProjectFiles/TKAL2GameTypes.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/TKAL2/Core/TKAL2GameMode.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/TKAL2/Core/TKAL2GameMode.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/TKAL2/Core/TKAL2InteractionInterface.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/TKAL2/Core/TKAL2InteractionInterface.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/TKAL2/Player/TKAL2InteractionComponent.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/TKAL2/Player/TKAL2InteractionComponent.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/TKAL2/Player/TKAL2PlayerCharacter.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/TKAL2/Player/TKAL2PlayerCharacter.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/TKAL2/Player/TKAL2PlayerController.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/TKAL2/Player/TKAL2PlayerController.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/TKAL2/Projectiles/TKAL2ProjectileMagic.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/TKAL2/Projectiles/TKAL2ProjectileMagic.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/TKAL2/TKAL2Character.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/TKAL2/TKAL2Character.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/TKAL2/World/TKAL2ExplosiveBarrel.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/TKAL2/World/TKAL2ExplosiveBarrel.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/TKAL2/World/TKAL2ItemChest.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/TKAL2/World/TKAL2ItemChest.h" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
@@ -170,7 +195,7 @@
       <updated>1778242367908</updated>
       <workItem from="1778242372062" duration="3294000" />
       <workItem from="1778291224408" duration="1972000" />
-      <workItem from="1778293769617" duration="3010000" />
+      <workItem from="1778293769617" duration="18972000" />
     </task>
     <servers />
   </component>

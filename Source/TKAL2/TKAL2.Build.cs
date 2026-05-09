@@ -7,7 +7,8 @@ public class TKAL2 : ModuleRules
 	public TKAL2(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
-	
+		PublicIncludePaths.Add("TKAL2");
+		
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {"Niagara", "EnhancedInput"});
