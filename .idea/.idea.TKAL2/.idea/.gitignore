@@ -1,0 +1,18 @@
+﻿# --- Unreal Engine ---
+Binaries/
+Build/
+DerivedDataCache/
+Intermediate/
+Saved/
+Script/
+*.sln
+*.uproject.user
+
+# --- JetBrains Rider ---
+.idea/
+*.sln.DotSettings.user
+# If you install RiderLink in your project instead of the Engine:
+Plugins/Developer/RiderLink/
+
+# --- Platform Specific ---
+.DS_Store
