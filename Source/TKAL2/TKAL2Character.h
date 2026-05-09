@@ -6,12 +6,14 @@
 #include "GameFramework/Character.h"
 #include "TKAL2Character.generated.h"
 
+class UNiagaraSystem;
 class ATKAL2ProjectileMagic;
 struct FInputActionInstance;
 struct FInputActionValue;
 class UInputAction;
 class USpringArmComponent;
 class UCameraComponent;
+class UAnimMontage;
 
 UCLASS()
 class TKAL2_API ATKAL2Character : public ACharacter
@@ -23,12 +25,20 @@ public:
 	ATKAL2Character();
 
 protected:
+	UPROPERTY(EditDefaultsOnly, Category="PrimaryAttack")
+	TObjectPtr<UNiagaraSystem> CastingEffect;
+	
+	UPROPERTY(EditDefaultsOnly, Category="PrimaryAttack")
+	TObjectPtr<USoundBase> CastingSound;
 	
 	UPROPERTY(VisibleAnywhere, Category="PrimaryAttack")
 	FName MuzzleSocketName;
 	
 	UPROPERTY(EditDefaultsOnly, Category="PrimaryAttack")
 	TSubclassOf<ATKAL2ProjectileMagic> ProjectileClass;
+	
+	UPROPERTY(EditDefaultsOnly, Category="PrimaryAttack")
+	TObjectPtr<UAnimMontage> AttackMontage;
 	
 	UPROPERTY(EditDefaultsOnly, Category="Input")
 	TObjectPtr<UInputAction> Input_Move;
@@ -38,6 +48,9 @@ protected:
 	
 	UPROPERTY(EditDefaultsOnly, Category="Input")
 	TObjectPtr<UInputAction> Input_PrimaryAttack;
+	
+	UPROPERTY(EditDefaultsOnly, Category="Input")
+	TObjectPtr<UInputAction> Input_Jump;
 	
 	UPROPERTY(VisibleAnywhere, Category="Components")
 	TObjectPtr<UCameraComponent> CameraComp;
@@ -50,6 +63,9 @@ protected:
 	void Move(const FInputActionValue& InValue);
 	void Look(const FInputActionInstance& InValue);
 	void PrimaryAttack();
+	
+	void AttackTimerElapsed();
+	
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

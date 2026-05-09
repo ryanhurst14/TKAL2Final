@@ -7,7 +7,7 @@
 #include "NiagaraComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "NiagaraFunctionLibrary.h"
-
+#include "Components/AudioComponent.h"
 // Sets default values
 ATKAL2ProjectileMagic::ATKAL2ProjectileMagic()
 {
@@ -17,18 +17,19 @@ ATKAL2ProjectileMagic::ATKAL2ProjectileMagic()
 	SphereComp->SetCollisionProfileName("Projectile");
 	
 	LoopedNiagaraComp = CreateDefaultSubobject<UNiagaraComponent>(TEXT("LoopedNiagaraComp"));
-	LoopedNiagaraComp->SetupAttachment(RootComponent);
+	LoopedNiagaraComp->SetupAttachment(SphereComp);
+	
+	LoopedAudioComp = CreateDefaultSubobject<UAudioComponent>(TEXT("LoopedAudioComp"));
+	LoopedAudioComp->SetupAttachment(SphereComp);
 	
 	ProjMoveComp = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjMoveComp"));
 	ProjMoveComp->InitialSpeed = 2000.0f;
 	ProjMoveComp->ProjectileGravityScale = 0.0f;
-	
 }
 
 void ATKAL2ProjectileMagic::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
-
 	SphereComp->OnComponentHit.AddDynamic(this, &ATKAL2ProjectileMagic::OnActorHit);
 	SphereComp->IgnoreActorWhenMoving(GetInstigator(), true);
 }
@@ -37,11 +38,15 @@ void ATKAL2ProjectileMagic::OnActorHit(UPrimitiveComponent* HitComponent, AActor
 	FVector NormalImpulse, const FHitResult& Hit)
 {
 	// @todo: create our own damage type
-	TSubclassOf<UDamageType> DmgTypeClass = UDamageType::StaticClass();
 	
-	UGameplayStatics::ApplyDamage(OtherActor, 10.f, GetInstigatorController(), this, DmgTypeClass);
+	FVector HitFromDirection = GetActorRotation().Vector();
+	
+	UGameplayStatics::ApplyPointDamage(OtherActor, 10.f, HitFromDirection, Hit, GetInstigatorController(),
+		this, DmgTypeClass);
 
 	UNiagaraFunctionLibrary::SpawnSystemAtLocation(this, ExplosionEffect, GetActorLocation());
 
+	UGameplayStatics::PlaySoundAtLocation(this, ExplosionSound, GetActorLocation(), FRotator::ZeroRotator);
+	
 	Destroy();
 }
